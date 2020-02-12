@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "lens-qa",
   "version": "1.0.0",
   "description": "qa automation proof of concept for lens project",
   "scripts": {
