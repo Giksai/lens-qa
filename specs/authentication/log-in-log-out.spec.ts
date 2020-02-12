@@ -1,18 +1,18 @@
 declare const allure: any;
-import Steps from '../utils/steps/steps';
-import Check from '../utils/check';
+import Steps from '../../utils/steps/steps';
+import Check from '../../utils/check';
 
 const adminCredentials   = {
-  login   : '',
-  password: ''
+  login   : 'ekaterina.karchmit@itechart-group.com',
+  password: 'test1234'
 };
 const userCredentials    = {
-  login   : '',
-  password: ''
+  login   : 'ekaterina.karchmit@gmail.com',
+  password: 'test1234'
 };
 const invalidCredentials = {
-  login   : '',
-  password: ''
+  login   : 'ekaterina.karchmit@gmail.com',
+  password: 'invalidCredentials'
 };
 
 
