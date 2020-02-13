@@ -18,7 +18,7 @@ const PROJECT  = 'Project';
 const TASKS    = 'Tasks';
 const TICKETS  = 'Tickets';
 
-describe('Portfolio. Entities displayed in grids.', function () {
+xdescribe('Portfolio. Entities displayed in grids.', function () {
   beforeAll(async function () {
     await Steps.createPortfolioUnderManagement({
       name    : TestData.PORTFOLIO_NAME,

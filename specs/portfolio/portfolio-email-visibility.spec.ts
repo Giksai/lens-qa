@@ -17,7 +17,7 @@ const TestData         = {
   ASSIGNEE_FOR_USER : 'Client Test Client'
 };
 
-describe('Portfolio. Email visibility', function () {
+xdescribe('Portfolio. Email visibility', function () {
   beforeEach(async function () {
     allure.feature('Portfolio');
     allure.story('Email visibility');

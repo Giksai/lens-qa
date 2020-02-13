@@ -9,7 +9,7 @@ const TestData = {
   PROJECT_NAME       : 'Barton Acres Solar, LLC'
 };
 
-describe('Data Download. File format.', function () {
+xdescribe('Data Download. File format.', function () {
   beforeEach(async function () {
     allure.feature('Data Download');
     allure.story('File format');

@@ -16,7 +16,7 @@ const invalidCredentials = {
 };
 
 
-describe('Authentication. Logging in and out.', function () {
+xdescribe('Authentication. Logging in and out.', function () {
   beforeEach(async function () {
     allure.feature('Authentication');
     allure.story('Logging in and out');

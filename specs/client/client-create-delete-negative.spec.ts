@@ -12,7 +12,7 @@ const TestData = {
   LONGITUDE  : 'TEST LONGITUDE'
 };
 
-describe('Client. Creation and deletion - negative cases', function () {
+xdescribe('Client. Creation and deletion - negative cases', function () {
   beforeEach(async function () {
     allure.feature('Client');
     allure.story('Creation and deletion - negative cases');

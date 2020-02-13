@@ -28,7 +28,7 @@ const TICKETS   = 'Tickets';
 const NOTES     = 'Notes';
 const EQUIPMENT = 'Equipment';
 
-describe('Project. Entities displayed in grids.', function () {
+xdescribe('Project. Entities displayed in grids.', function () {
   beforeAll(async function () {
     await Steps.createSimpleProject({
       'name'      : TestData.PROJECT_NAME,

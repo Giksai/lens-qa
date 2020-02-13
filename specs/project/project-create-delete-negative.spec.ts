@@ -15,7 +15,7 @@ const TestData = {
   CLIENT      : '38 Degrees North'
 };
 
-describe('Project. Creation and deletion - negative cases', function () {
+xdescribe('Project. Creation and deletion - negative cases', function () {
   beforeEach(async function () {
     allure.feature('Project');
     allure.story('Creation and deletion - negative cases');

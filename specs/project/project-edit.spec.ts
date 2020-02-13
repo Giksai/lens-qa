@@ -14,7 +14,7 @@ const TestData = {
   NEW_ASSET_MANAGER   : '_CI _Support'
 };
 
-describe('Project. Editing', function () {
+xdescribe('Project. Editing', function () {
   beforeEach(async function () {
     allure.feature('Project');
     allure.story('Editing');

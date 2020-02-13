@@ -22,7 +22,7 @@ const PROJECT    = 'Project';
 const TICKETS    = 'Tickets';
 const EQUIPMENT  = 'Equipment';
 
-describe('Client. Entities displayed in grids.', function () {
+xdescribe('Client. Entities displayed in grids.', function () {
   beforeAll(async function () {
     await Steps.navigationSteps.goToEntityCreation('Clients', 'Add New Client');
     await Steps.submitNewEntity({ name: TestData.CLIENT_NAME });

@@ -6,7 +6,7 @@ const TestData = {
   CLIENT_NAME: 'regression test client'
 };
 
-describe('Client. Creation and deletion - positive cases', function () {
+xdescribe('Client. Creation and deletion - positive cases', function () {
   beforeEach(async function () {
     allure.feature('Client');
     allure.story('Creation and deletion - positive cases');

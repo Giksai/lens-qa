@@ -22,7 +22,7 @@ const initialTemplate  = {
   gridName    : CUSTOM_TEMPLATES
 };
 
-describe('Data Download. Templates - Creation and deletion.', function () {
+xdescribe('Data Download. Templates - Creation and deletion.', function () {
   beforeEach(async function () {
     allure.feature('Data Download');
     allure.story('Templates - Creation and deletion.');

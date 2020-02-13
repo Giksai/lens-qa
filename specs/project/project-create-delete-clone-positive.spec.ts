@@ -95,7 +95,7 @@ const notToCloneFields            = {
 };
 
 
-describe('Project. Creation and deletion - positive cases', function () {
+xdescribe('Project. Creation and deletion - positive cases', function () {
   beforeEach(async function () {
     allure.feature('Project');
     allure.story('Creation and deletion - positive cases');

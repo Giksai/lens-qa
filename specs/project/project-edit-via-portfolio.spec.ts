@@ -21,7 +21,7 @@ const TestData = {
   LOSSES              : '11'
 };
 
-describe('Project. Actions with project via Portfolio.', function () {
+xdescribe('Project. Actions with project via Portfolio.', function () {
   beforeEach(async function () {
     allure.feature('Project');
     allure.story('Actions with project via Portfolio');

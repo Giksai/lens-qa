@@ -9,7 +9,7 @@ const TestData = {
   NEW_COMMENT    : 'UPDATED TEST comment'
 };
 
-describe('Client. Editing', function () {
+xdescribe('Client. Editing', function () {
   beforeEach(async function () {
     allure.feature('Client');
     allure.story('Editing');

@@ -9,7 +9,7 @@ const TestData = {
   ASSIGNEE      : '_ Support at Radian'
 };
 
-describe('Project. Actions with project via Portfolio.', function () {
+xdescribe('Project. Actions with project via Portfolio.', function () {
   beforeEach(async function () {
     allure.feature('Project');
     allure.story('Actions with project via Portfolio');

@@ -9,7 +9,7 @@ const TestData = {
 };
 const numberOfProjects = 5;
 
-describe('Group. Creation and deletion - positive cases', function () {
+xdescribe('Group. Creation and deletion - positive cases', function () {
   beforeEach(async function () {
     allure.feature('Group');
     allure.story('Creation and deletion - positive cases');
