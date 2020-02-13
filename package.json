@@ -10,7 +10,8 @@
     "debug": "tsc && protractor ./build/protractor.conf.js --highlightDelay 5000 --webDriverLogDir artifacts/logs",
     "protractor": "protractor ./build/protractor.conf.js",
     "allure": "allure generate artifacts/test-reports/allure-src -o artifacts/test-reports/allure-results --clean",
-    "results": "allure open artifacts/test-reports/allure-results"
+    "results": "allure open artifacts/test-reports/allure-results",
+    "clean": "rmdir /s /q build && rmdir /s /q artifacts\\test-reports"
   },
   "author": "---------------------------",
   "dependencies": {
