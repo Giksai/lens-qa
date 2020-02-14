@@ -36,6 +36,8 @@ It is better to clean reports directory before tests.
 
 Running tests in debug mode requires artifacts/logs folder.
 
+Search parameters will be saved and carried over different sessions and may break tests that uses searching.
+
 TODO - Chose task runner you are familiar with and reports directory cleanup before tests.
 
 ### Test environment
