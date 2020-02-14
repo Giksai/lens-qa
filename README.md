@@ -34,14 +34,16 @@ You could open report in firefox without IDE support.
 #### note!
 It is better to clean reports directory before tests.
 
+Running tests in debug mode requires artifacts/logs folder.
+
 TODO - Chose task runner you are familiar with and reports directory cleanup before tests.
 
 ### Test environment
 
 #### Prerequisites
 
-You must have Java and Node.js installed in your system to run tests.
-Solution tested under Java 8 and Node.js 10.
+You must have Java, Node.js, Visual Studio and Python installed in your system to run tests.
+Solution tested under Java 8 and Node.js 12.14.0.
 
 #### Test configuration
 
