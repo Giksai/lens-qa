@@ -100,7 +100,7 @@ const notToCloneFields            = {
 };
 
 
-xdescribe('Project. Actions with project via Portfolio.', function () {
+describe('Project. Actions with project via Portfolio.', function () {
   beforeEach(async function () {
     allure.feature('Project');
     allure.story('Actions with project via Portfolio');

@@ -15,7 +15,7 @@ const autoCreatedTask = {
   gridName    : TASKS
 };
 
-xdescribe('Portfolio. Creation and deletion - positive cases', function () {
+describe('Portfolio. Creation and deletion - positive cases', function () {
   beforeEach(async function () {
     allure.feature('Portfolio');
     allure.story('Creation and deletion - positive cases');

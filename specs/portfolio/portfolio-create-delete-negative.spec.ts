@@ -17,7 +17,7 @@ const SIMPLE_PORTFOLIO_REQUIRED_FIELDS           = [
   'Client'
 ];
 
-xdescribe('Portfolio. Creation and deletion - negative cases', function () {
+describe('Portfolio. Creation and deletion - negative cases', function () {
   beforeEach(async function () {
     allure.feature('Portfolio');
     allure.story('Creation and deletion - negative cases');

@@ -41,7 +41,7 @@ const newRetrievalValues         = [
   'Cyclical'
 ];
 
-xdescribe('Data Download. Templates - Editing.', function () {
+describe('Data Download. Templates - Editing.', function () {
   beforeEach(async function () {
     allure.feature('Data Download');
     allure.story('Templates - Editing');
