@@ -1,6 +1,6 @@
 declare const allure: any;
-import Steps from '../utils/steps/steps';
-import Check from '../utils/check';
+import Steps from '../../utils/steps/steps';
+import Check from '../../utils/check';
 
 const adminCredentials   = {
   login   : '',

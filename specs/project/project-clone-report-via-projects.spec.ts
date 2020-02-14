@@ -131,7 +131,6 @@ describe('Project. Actions with project via Portfolio.', function () {
     await Steps.navigationSteps.goBackUntilPageIs(TestData.PORTFOLIO_NAME);
     await Steps.deleteCurrentlyViewedEntity();
     await Check.isOnPage('ADD NEW PORTFOLIO');
-
   });
 
   it('7.7 - Can clone Project via Portfolio page (needed fields are cloned)', async function () {
@@ -152,7 +151,6 @@ describe('Project. Actions with project via Portfolio.', function () {
     await Steps.navigationSteps.goBackUntilPageIs(TestData.PORTFOLIO_NAME);
     await Steps.deleteCurrentlyViewedEntity();
     await Check.isOnPage('ADD NEW PORTFOLIO');
-
   });
 
   it('7.8 - Can go to Project performance report via Portfolio page', async function () {

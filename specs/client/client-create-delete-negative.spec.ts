@@ -34,7 +34,7 @@ describe('Client. Creation and deletion - negative cases', function () {
     await Check.isOnPage('ADD NEW CLIENT');
   });
 
-  xit('12.2 - Cannot create a client with a letters in Latitude and Longitude fields', async function () { //TODO remove x when issue with logo is fixed. Skipped for now
+  it('12.2 - Cannot create a client with a letters in Latitude and Longitude fields', async function () { //TODO remove x when issue with logo is fixed. Skipped for now
     await Steps.submitNewEntity({
       name     : TestData.CLIENT_NAME,
       latitude : TestData.LATITUDE,

@@ -18,14 +18,20 @@ const TestData         = {
 };
 
 describe('Portfolio. Email visibility', function () {
+  beforeAll(async function () {
+    await Steps.logInLogOutSteps.logout();
+  });
+
   beforeEach(async function () {
     allure.feature('Portfolio');
     allure.story('Email visibility');
-    await Steps.logInLogOutSteps.logout();
   });
 
   afterEach(async function () {
     await Steps.logInLogOutSteps.logout();
+  });
+
+  afterAll(async function () {
     await Steps.logInLogOutSteps.login();
   });
 

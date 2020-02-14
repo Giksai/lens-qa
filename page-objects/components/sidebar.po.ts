@@ -25,9 +25,8 @@ class Sidebar {
     const nestedOptionElement = this.rootElement.element(by.cssContainingText(this.NESTED_OPTION_SELECTOR, nestedOptionName));
     await browser.actions()
       .mouseMove(rootOptionElement)
-      .mouseMove(nestedOptionElement)
       .perform();
-    return nestedOptionElement.click();
+    await nestedOptionElement.click();
   }
 
   /**
@@ -40,7 +39,7 @@ class Sidebar {
       throw new Error('sidebar root option name is not specified');
     }
     const rootOptionElement = this.rootElement.element(by.cssContainingText(this.ROOT_OPTION_SELECTOR, optionName));
-    return rootOptionElement.click();
+    await rootOptionElement.click();
   }
 }
 
