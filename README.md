@@ -42,7 +42,7 @@ TODO - Chose task runner you are familiar with and reports directory cleanup bef
 
 #### Prerequisites
 
-You must have Java, Node.js, Visual Studio and Python installed in your system to run tests.
+You must have Java, Node.js, Visual Studio with c++ desktop development and Python installed in your system to run tests.
 Solution tested under Java 8 and Node.js 12.14.0.
 
 #### Test configuration
