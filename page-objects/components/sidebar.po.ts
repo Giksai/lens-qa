@@ -3,6 +3,7 @@
  */
 
 import { $, browser, by } from 'protractor';
+import Actions from '../../utils/actions';
 
 class Sidebar {
   private rootElement            = $('#sidebar');
@@ -26,6 +27,7 @@ class Sidebar {
     await browser.actions()
       .mouseMove(rootOptionElement)
       .perform();
+    await Actions.waitToBeInteractable(nestedOptionElement);
     await nestedOptionElement.click();
   }
 
