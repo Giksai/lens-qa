@@ -1,15 +1,12 @@
 import { Config, browser } from 'protractor';
+import CredentialsManager from './utils/credentialsManager';
 
 const path          = require('path');
 const downloadsPath = path.resolve(__dirname, '../downloads');
 
 const conf: Config = {
   params: {
-    defaultUser: {
-      login   : '', // admin
-      // login: '', // user
-      password: ''
-    }
+    defaultUser: CredentialsManager.adminUser
   },
 
   // would be added to every GET request via Protractor

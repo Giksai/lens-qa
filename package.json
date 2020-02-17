@@ -9,10 +9,14 @@
     "test": "npm-run-all protractor allure --continue-on-error",
     "debug": "tsc && protractor ./build/protractor.conf.js --highlightDelay 5000 --webDriverLogDir artifacts/logs",
     "protractor": "protractor ./build/protractor.conf.js",
-    "allure": "allure generate artifacts/test-reports/allure-src -o artifacts/test-reports/allure-results --clean"
+    "allure": "allure generate artifacts/test-reports/allure-src -o artifacts/test-reports/allure-results --clean",
+    "results": "allure open artifacts/test-reports/allure-results",
+    "clean": "rmdir /s /q build && rmdir /s /q artifacts\\test-reports",
+    "cleanrun": "rmdir /s /q build && rmdir /s /q artifacts\\test-reports && npm test"
   },
   "author": "---------------------------",
   "dependencies": {
+    "@types/node": "^13.7.1",
     "allure-commandline": "2.7.0",
     "deasync": "0.1.13",
     "jasmine-allure-reporter": "1.0.2",
