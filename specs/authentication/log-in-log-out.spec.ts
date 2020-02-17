@@ -7,7 +7,7 @@ const adminCredentials   = CredentialsManager.adminUser;
 const userCredentials    = CredentialsManager.defaultUser;
 const invalidCredentials = CredentialsManager.fakeUser;
 
-fdescribe('Authentication. Logging in and out.', function () {
+describe('Authentication. Logging in and out.', function () {
   beforeAll(async function () {
     await Steps.logInLogOutSteps.logout();
   });
