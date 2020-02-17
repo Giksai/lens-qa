@@ -27,7 +27,6 @@ describe('Portfolio. Editing', function () {
   afterEach(async function () {
     await Steps.deleteCurrentlyViewedEntity();
   });
-
   it('4.1 - Can cancel data editing', async function () {
     await Steps.editCurrentEntity({
       name  : TestData.NEW_PORTFOLIO_NAME,
