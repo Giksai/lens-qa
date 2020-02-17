@@ -42,7 +42,5 @@ fdescribe('Authentication. Logging in and out.', function () {
   it('1.4 - Cannot login with invalid password', async function () {
     await Steps.logInLogOutSteps.login(invalidCredentials);
     await Check.isInvalidLoginWarningDisplayed();
-    
-    await Steps.logInLogOutSteps.logout(); // additional cleanup of test state before "afterEach"
   });
 });
