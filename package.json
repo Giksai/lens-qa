@@ -16,6 +16,7 @@
   },
   "author": "---------------------------",
   "dependencies": {
+    "@types/node": "^13.7.1",
     "allure-commandline": "2.7.0",
     "deasync": "0.1.13",
     "jasmine-allure-reporter": "1.0.2",
