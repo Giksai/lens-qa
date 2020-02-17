@@ -13,7 +13,7 @@ const TestData         = {
 const numberOfProjects = 3;
 const PROJECT          = 'Project';
 
-describe('Group. Editing - positive cases', function () {
+describe('Group. Editing', function () {
   beforeEach(async function () {
     allure.feature('Group');
     allure.story('Editing');

@@ -94,6 +94,7 @@ const notToCloneFields            = {
   'external link url'     : TestData.EXTERNAL_LINK_URL,
 };
 
+
 describe('Project. Creation and deletion - positive cases', function () {
   beforeEach(async function () {
     allure.feature('Project');
@@ -107,7 +108,6 @@ describe('Project. Creation and deletion - positive cases', function () {
   });
 
   it('9.1 - Can clone a project (name and external links are not cloned)', async function () {
-    //Note - in order for a project to be created, active portfolio with name `Test_portfolio_do_not_touch` should exist.
     await Steps.submitNewEntity(allFieldsForCreatingProject);
     await Check.isOnPage(TestData.INITIAL_PROJECT_NAME);
 

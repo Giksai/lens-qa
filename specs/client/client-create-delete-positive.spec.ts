@@ -34,7 +34,7 @@ describe('Client. Creation and deletion - positive cases', function () {
     await Check.isOnPage(TestData.CLIENT_NAME);
 
     await Steps.navigationSteps.goToEntityManagement('Clients', 'Manage Clients');
-    await Steps.filteringSteps.filterGridBy(TestData.CLIENT_NAME);
+    await Steps.filteringSteps.filterGridBy({ name: TestData.CLIENT_NAME });
     await Check.isGridResultsCount(1);
 
     //deletion with name confirmation and check
