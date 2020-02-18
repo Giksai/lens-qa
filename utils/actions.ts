@@ -37,10 +37,10 @@ export default class Actions {
    * Waits for an element to be interactable
    * Usable when some elements appear with animation, during which they are not interactable
    */
-  static async waitToBeInteractable(elem: ElementFinder): Promise<void> {
+  static async waitToBeInteractable(elem: ElementFinder, timeout: number = 5000): Promise<void> {
     await browser.wait( //Added to improve stability and spontaneous falls
       protractor.ExpectedConditions.elementToBeClickable(elem),
-      5 * 1000,
+      timeout,
       'Element is not interactable'
     );
   }
