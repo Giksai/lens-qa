@@ -1,15 +1,13 @@
 import { Config, browser } from 'protractor';
+import CredentialsManager from './utils/credentialsManager';
+import {SpecReporter} from 'jasmine-spec-reporter';
 
 const path          = require('path');
 const downloadsPath = path.resolve(__dirname, '../downloads');
 
 const conf: Config = {
   params: {
-    defaultUser: {
-      login   : '', // admin
-      // login: '', // user
-      password: ''
-    }
+    defaultUser: CredentialsManager.adminUser
   },
 
   // would be added to every GET request via Protractor
@@ -43,6 +41,27 @@ const conf: Config = {
     // adding allure reporter
     const Allure = require('jasmine-allure-reporter');
     env.addReporter(new Allure({ resultsDir: './artifacts/test-reports/allure-src' }));
+    env.addReporter(
+      new SpecReporter({
+        // Defaults: https://github.com/bcaudan/jasmine-spec-reporter#default-options
+        // Configuration: https://github.com/bcaudan/jasmine-spec-reporter/blob/master/src/configuration.ts
+        suite: {
+          displayNumber: true,    // display each suite number (hierarchical)
+        },
+        spec: {
+          displayPending: true,   // display each pending spec
+          displayDuration: true,  // display each spec duration
+        },
+        summary: {
+          displayErrorMessages: true, // display summary of all successes after execution
+          displayStacktrace: true,
+          displaySuccessful: true,
+          displayDuration: true,
+          displayFailed: false,    // display summary of all failures after execution
+          displayPending: false,   // display summary of all pending specs after execution
+        },
+      })
+    );
 
     require('./utils/locators'); // adding custom locators to Protractor
 
