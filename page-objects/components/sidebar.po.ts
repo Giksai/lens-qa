@@ -3,6 +3,8 @@
  */
 
 import { $, browser, by } from 'protractor';
+import Actions            from '../../utils/actions';
+import mainContent        from '../main-content.po';
 
 class Sidebar {
   private rootElement            = $('#sidebar');
@@ -23,11 +25,29 @@ class Sidebar {
     }
     const rootOptionElement   = this.rootElement.element(by.cssContainingText(this.ROOT_OPTION_SELECTOR, rootOptionName));
     const nestedOptionElement = this.rootElement.element(by.cssContainingText(this.NESTED_OPTION_SELECTOR, nestedOptionName));
-    await browser.actions()
-      .mouseMove(rootOptionElement)
-      .mouseMove(nestedOptionElement)
-      .perform();
-    return nestedOptionElement.click();
+    let actualPageHeader = await mainContent.mainHeader.getText();
+    do {
+      try {
+        await browser.actions()
+        .mouseMove(rootOptionElement)
+        .perform();
+        await Actions.waitToBeInteractable(nestedOptionElement, 500);
+        await nestedOptionElement.click();
+        actualPageHeader = await mainContent.mainHeader.getText();
+      } catch {}
+    } while (!this.checkIfOnDesiredPage(actualPageHeader, nestedOptionName));
+  }
+
+  private checkIfOnDesiredPage(currentPage: string, desiredPage: string): boolean { //TODO: remove this when DATA DOWNLOAD page will become DATA DOWNLOADS
+    if(currentPage.toUpperCase() === "DATA DOWNLOAD"
+        && desiredPage.toUpperCase() === "DATA DOWNLOADS") {
+        return true;
+    }
+    if(currentPage.toUpperCase() === desiredPage.toUpperCase()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -40,7 +60,7 @@ class Sidebar {
       throw new Error('sidebar root option name is not specified');
     }
     const rootOptionElement = this.rootElement.element(by.cssContainingText(this.ROOT_OPTION_SELECTOR, optionName));
-    return rootOptionElement.click();
+    await rootOptionElement.click();
   }
 }
 

@@ -1,36 +1,30 @@
 declare const allure: any;
-import Steps from '../utils/steps/steps';
-import Check from '../utils/check';
+import Steps from '../../utils/steps/steps';
+import Check from '../../utils/check';
+import CredentialsManager from '../../utils/credentialsManager';
 
-const adminCredentials   = {
-  login   : '',
-  password: ''
-};
-const userCredentials    = {
-  login   : '',
-  password: ''
-};
-const invalidCredentials = {
-  login   : '',
-  password: ''
-};
-
+const adminCredentials   = CredentialsManager.adminUser;
+const userCredentials    = CredentialsManager.defaultUser;
+const invalidCredentials = CredentialsManager.fakeUser;
 
 describe('Authentication. Logging in and out.', function () {
-  beforeEach(async function () {
-    allure.feature('Authentication');
-    allure.story('Logging in and out');
+  beforeAll(async function () {
     await Steps.logInLogOutSteps.logout();
   });
 
-  afterEach(async function () {
+  beforeEach(async function () {
+    allure.feature('Authentication');
+    allure.story('Logging in and out');
+  });
+
+  afterAll(async function () {
     await Steps.logInLogOutSteps.login();
   });
 
   it('1.1 - Can login as admin user', async function () {
     await Steps.logInLogOutSteps.login(adminCredentials);
     await Check.isOnPage('DASHBOARD');
-
+    
     await Steps.logInLogOutSteps.logout(); // additional cleanup of test state before "afterEach"
   });
 

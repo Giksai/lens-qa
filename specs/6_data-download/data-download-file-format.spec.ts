@@ -14,6 +14,7 @@ describe('Data Download. File format.', function () {
     allure.feature('Data Download');
     allure.story('File format');
     await Actions.removeAllDownloadedFiles();
+    await Steps.navigationSteps.goToEntityManagement('Reports', 'Data Downloads');
   });
 
   afterEach(async function () {
@@ -22,7 +23,6 @@ describe('Data Download. File format.', function () {
   });
 
   it('18.1 - Can download file in CSV format', async function () {
-    await Steps.navigationSteps.goToEntityManagement('Reports', 'Data Downloads');
     await Steps.dataDownloadSteps.downloadDataWithFileExtension('csv', {
       client   : TestData.CLIENT,
       portfolio: TestData.PORTFOLIO_NAME,
@@ -32,7 +32,6 @@ describe('Data Download. File format.', function () {
   });
 
   it('18.2 - Can download file in XLSX format', async function () {
-    await Steps.navigationSteps.goToEntityManagement('Reports', 'Data Downloads');
     await Steps.dataDownloadSteps.downloadDataWithFileExtension('xlsx', {
       client   : TestData.CLIENT,
       portfolio: TestData.PORTFOLIO_NAME,

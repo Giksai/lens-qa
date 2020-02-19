@@ -34,6 +34,18 @@ export default class Actions {
   }
 
   /**
+   * Waits for an element to be interactable
+   * Usable when some elements appear with animation, during which they are not interactable
+   */
+  static async waitToBeInteractable(elem: ElementFinder, timeout: number = 5000): Promise<void> {
+    await browser.wait( //Added to improve stability and spontaneous falls
+      protractor.ExpectedConditions.elementToBeClickable(elem),
+      timeout,
+      'Element is not interactable'
+    );
+  }
+
+  /**
    * Performs scrolling to the top of the page by pressing "Home" button
    */
   static async scrollPageUp(): Promise<void> {

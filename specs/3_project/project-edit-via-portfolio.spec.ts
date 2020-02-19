@@ -70,5 +70,9 @@ describe('Project. Actions with project via Portfolio.', function () {
     // test state cleanup
     await Steps.deleteFirstFilteredGridRow();
     await Check.isFilteredGridResultsCount(0);
+    await Steps.navigationSteps.goToEntityManagement('Portfolios', 'Manage Portfolios');
+    await Steps.filteringSteps.filterGridByColumnName({ name: TestData.PORTFOLIO_NAME });
+    await Steps.deleteFirstFilteredGridRow();
+    await Check.isFilteredGridResultsCount(0);
   });
 });

@@ -1,15 +1,10 @@
 declare const allure: any;
 import Steps from '../../utils/steps/steps';
 import Check from '../../utils/check';
+import CredentialsManager from '../../utils/credentialsManager';
 
-const adminCredentials = {
-  login   : '',
-  password: ''
-};
-const userCredentials  = {
-  login   : '',
-  password: ''
-};
+const adminCredentials = CredentialsManager.adminUser;
+const userCredentials  = CredentialsManager.defaultUser;
 const TestData         = {
   PORTFOLIO_NAME    : 'regression test portfolio',
   CLIENT            : '38 Degrees North',
@@ -18,14 +13,20 @@ const TestData         = {
 };
 
 describe('Portfolio. Email visibility', function () {
+  beforeAll(async function () {
+    await Steps.logInLogOutSteps.logout();
+  });
+
   beforeEach(async function () {
     allure.feature('Portfolio');
     allure.story('Email visibility');
-    await Steps.logInLogOutSteps.logout();
   });
 
   afterEach(async function () {
     await Steps.logInLogOutSteps.logout();
+  });
+
+  afterAll(async function () {
     await Steps.logInLogOutSteps.login();
   });
 
