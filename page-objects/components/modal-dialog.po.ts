@@ -28,6 +28,18 @@ class ModalDialog {
     return this.rootElement.element(by.cssContainingText('.btn', 'SKIP'));
   }
 
+  get proceedBtn(): ElementFinder {
+    return this.rootElement.element(by.cssContainingText('.btn', 'Proceed'));
+  }
+
+  get cancelBtn(): ElementFinder {
+    return this.rootElement.element(by.cssContainingText('.btn', 'Cancel'));
+  }
+
+  get closeBtn(): ElementFinder {
+    return this.rootElement.element(by.cssContainingText('.btn', 'Close'));
+  }
+
   /**
    * Resolvers to true, if dialog is shown on the page. Otherwise resolves to false
    */

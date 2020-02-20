@@ -2,6 +2,7 @@ import entityViewPage       from "../../page-objects/entity/entity-view-page.po"
 import grid                 from "../../page-objects/components/grid/grid.po";
 import dataDownload         from "../../page-objects/reports/data-download.po";
 import editableEntityFields from "../../page-objects/entity/editable-entity-fields.po";
+import Steps from "./steps";
 
 type DataObject = { [key: string]: string };
 
@@ -14,6 +15,8 @@ export default class DataDownloadSteps {
     await editableEntityFields.setFieldValues(entityData);
     await dataDownload.clickRadioBtnWithLabel(extension);
     await dataDownload.generateBtn.click();
+    await Steps.modalDialogSteps.confirmIfAsked();
+    await Steps.modalDialogSteps.cancelIfAsked();
   }
 
   /**
