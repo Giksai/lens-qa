@@ -232,7 +232,7 @@ export default class Check {
   /**
    * Checks that file is downloaded
    */
-  static async isDownloadedFileExist(extension: string): Promise<void> {
+  static async isDownloadedFileExist(extension: string, timeout: number = 30000): Promise<void> {
     const filePath = await path.resolve(__dirname, '../../downloads/');
 
     let targetFile;
@@ -245,7 +245,7 @@ export default class Check {
         return true;
       }
       return false;
-    }, 30000, "File has not downloaded within 30 seconds");
+    }, timeout, "File has not downloaded within 30 seconds");
 
     expect(await fs.existsSync(path.join(filePath, targetFile))).toBe(true, `File with extension "${extension}" does not exist in "${filePath}"`);
   }

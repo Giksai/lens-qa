@@ -1,7 +1,6 @@
 /**
  * Collection of complex or non-standard WebDriver actions
  */
-
 import { browser, $, protractor, ElementFinder } from 'protractor';
 import * as fs                                   from 'fs';
 import * as path                                 from 'path';
@@ -102,5 +101,69 @@ export default class Actions {
         await fs.unlinkSync(path.join(filePath, file))
       }
     }
+  }
+
+  /**
+   * Universal function to wait for a custom condition
+   * @param predicate custom condition
+   * @param timeout time in milliseconds before function will fail
+   */
+  static async waitFor(predicate: Function, timeout = 5000, askingFrequency = 500) {
+    while (await predicate() === false) {
+      await browser.sleep(askingFrequency);
+      timeout -= askingFrequency
+      if (timeout <= 0) return false;
+    }
+    return true;
+  }
+
+  /**
+   * Automatically opens a new window, downloads a file and closes it
+   */
+  static async downloadFileByLink(link: string) {
+    await browser.executeScript(`window.open(arguments[0], '_blank')`, link);
+  }
+
+  /**
+   * Gets a correct report download link from mail message
+   */
+  static extractLinkFromMessageBody(body: string) {
+    body = body
+      .replace(/=\r\n/g, '')    //removes ENTERS and '='
+      .replace(/&amp;/g, '&')   //removes excessive symbols
+      .replace(/=3D/g, '=');    //removes excessive symbols
+    let regex = /((https?:\/\/|ftp:\/\/|www\.|[^\s:=]+@www\.).*?[a-z_\/0-9\-\#=&])(?=(\.|,|;|\?|\!)?("|'|«|»|\[|\s|\r|\n|$))/gm;
+    let allLinks = body.match(regex);
+    return allLinks[5];
+  }
+
+  /**
+   * Opens a separate window and switches to it
+   */
+  static async openNewWindow() {
+    await browser.executeScript('window.open()');
+    let handles = await browser.getAllWindowHandles();
+    await this.switchToWindow({
+      windowHandle: handles[handles.length - 1]
+    });
+  }
+
+  /**
+   * Switches to the window with the given index or window handle
+   */
+  static async switchToWindow({ index = null, windowHandle = null }: { index?: number, windowHandle?: string }) {
+    let targetWindowHandle: string;
+    if (index) {
+      let handles = await browser.getAllWindowHandles();
+      targetWindowHandle = handles[index];
+    }
+    if (windowHandle) {
+      targetWindowHandle = windowHandle;
+    }
+    await browser.switchTo().window(targetWindowHandle);
+  }
+
+  static async closeCurrentWindow() {
+    await browser.driver.close();
   }
 }

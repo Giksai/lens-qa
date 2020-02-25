@@ -14,8 +14,10 @@ const TestData                   = {
   STANDART_PROJECT_NAME                : 'Barton Acres Solar, LLC',
   BIG_DATA_PROJECT_NAME                : 'Utah Red Hills Renewable Park',
 
-  MONTH_DATE_RANGE                     : '12/01/2019 - 12/31/2019',
+  MONTH_DATE_RANGE                     : '01/01/2020 - 01/31/2020',
   DAY_DATE_RANGE                       : '12/01/2019 - 12/01/2019',
+  MESSAGE_SUBJECT                      : 'Lens report was generated',
+  MESSAGE_WAIT_TIMEOUT                 : 240000,
 };
 
 describe('Data Download.', function () {
@@ -45,8 +47,8 @@ describe('Data Download.', function () {
         'portfolio' : TestData.BIG_DATA_PORTFOLIO_NAME,
         'project'   : TestData.BIG_DATA_PROJECT_NAME,
         'date range': TestData.MONTH_DATE_RANGE
-      });
-      //TODO: add email link check
+      }, TestData.MESSAGE_SUBJECT, TestData.MESSAGE_WAIT_TIMEOUT);
+    await Check.isDownloadedFileExist('csv', TestData.MESSAGE_WAIT_TIMEOUT);
   });
 
   it('20.3 - Can download the hourly data report + 1 day date range (Standard Projects)', async function () {
@@ -66,6 +68,6 @@ describe('Data Download.', function () {
         'project'   : TestData.BIG_DATA_PROJECT_NAME,
         'date range': TestData.DAY_DATE_RANGE
       });
-      //TODO: add email link check
+    await Check.isDownloadedFileExist('csv', TestData.MESSAGE_WAIT_TIMEOUT);
   });
 });
