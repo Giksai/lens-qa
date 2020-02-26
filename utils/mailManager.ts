@@ -3,10 +3,10 @@ import Actions                  from './actions';
 const axios = require('axios').default;
 
 class MailManager {
-  private adress = ConfigManager.mailConfig.adress;
-  private request_getAllMail = this.adress + '/messages';
+  private address = ConfigManager.mailConfig.address;
+  private request_getAllMail = this.address + '/messages';
   private request_getMailContent(mailId) {
-    return this.adress + `/messages/${mailId}:id.json`;
+    return this.address + `/messages/${mailId}:id.json`;
   }
 
   async isWorking(): Promise<boolean> {
