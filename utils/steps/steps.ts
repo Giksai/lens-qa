@@ -174,7 +174,7 @@ export default class Steps {
     await currentGrid.deleteFirstResult();
     await Actions.confirmAlert();
     if (entityData) {
-      await editableEntityFields.setFieldValues(entityData)
+      await editableEntityFields.setFieldValues(entityData);
     }
     await Steps.modalDialogSteps.confirmIfAsked();
   }
@@ -184,7 +184,7 @@ export default class Steps {
     await currentGrid.deleteFirstRowInFilteredGrid();
     await Actions.confirmAlert();
     if (entityData) {
-      await editableEntityFields.setFieldValues(entityData)
+      await editableEntityFields.setFieldValues(entityData);
     }
     await Steps.modalDialogSteps.confirmIfAsked();
   }
@@ -256,5 +256,14 @@ export default class Steps {
   static async openReportsFromGrid({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await currentGrid.pressReportResultWith(columnNumber, text);
+  }
+
+   /**
+   * --------------- DOWNLOAD ---------------
+   */
+
+  static async downloadGridElement({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
+    const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
+    await currentGrid.pressDownloadIcon(columnNumber, text);
   }
 }

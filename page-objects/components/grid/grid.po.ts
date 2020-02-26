@@ -22,6 +22,7 @@ export class Grid {
   private deleteBtnSelector                     = '.rg-bin';
   private reportBtnSelector                     = '.fa-area-chart';
   private cloneBtnSelector                      = '.fa-clone';
+  private downloadBtnSelector                   = '.rg-download';
   private editBtnSelector                       = '.rg-pen';
   private checkboxSelector                      = '.icheckbox_square-grey';
   private retrievalModeDropdownSelector         = '#retrieval_mode';
@@ -173,6 +174,12 @@ export class Grid {
     const targetResult = this.getResultRowByColumnText(columnNumber, text);
     const cloneIcon    = targetResult.$(this.cloneBtnSelector);
     await Actions.scrollUpUntilElemIsVisibleAndClick(cloneIcon);
+  }
+
+  async pressDownloadIcon(columnNumber: number, text: string): Promise<void> {
+    const targetResult = this.getResultRowByColumnText(columnNumber, text);
+    const downloadIcon = targetResult.$(this.downloadBtnSelector);
+    await Actions.scrollUpUntilElemIsVisibleAndClick(downloadIcon);
   }
 
   /**
