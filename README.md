@@ -59,7 +59,7 @@ To change user, change `params.defaultUser.login` and `params.defaultUser.passwo
 
 Note that this changes can break down some tests.
 
-Step 20.2 requires a valid mailcatcher adress located in config.json.
+Step 20.2 requires a valid mailcatcher address located in config.json.
 
 ### Test data
 
