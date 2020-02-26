@@ -11,6 +11,9 @@ To run autotests more slowly,
  execute `npm run debug`.
 (Logs can be found in `artifacts/logs` directory).
 
+To delete allure test results folder (test-reports) and build folder, run `npm run clean`. If there is no build or test-reports folder, 
+it will throw an error, which is ok.
+
 ### Configuring tests to run
 
 To focus some spec, change `describe(...)` to `fdescribe(...)`.
@@ -55,6 +58,8 @@ To change stand on which test are running, change `baseUrl` property in `protrac
 To change user, change `params.defaultUser.login` and `params.defaultUser.password` properties in `protractor.conf`.
 
 Note that this changes can break down some tests.
+
+Step 20.2 requires a valid mailcatcher adress located in config.json.
 
 ### Test data
 

@@ -4,11 +4,13 @@
 
 import { $, element, by, browser, protractor, ElementFinder } from 'protractor';
 import Actions                                                from '../../utils/actions';
+import DateRange                                              from '../components/date-range.po';
 
 enum FieldTypes {
   SIMPLE_FIELD   = 'simple field',
   SIMPLE_SELECT  = 'simple select',
-  COMPLEX_SELECT = 'complex select' // May have or not have e-mail. Behaves differently for Protractor
+  COMPLEX_SELECT = 'complex select', // May have or not have e-mail. Behaves differently for Protractor
+  DATE_RANGE     = 'date range'
 }
 
 type FieldElement = { type: FieldTypes, elem: ElementFinder };
@@ -35,6 +37,7 @@ class EditableEntityFields {
       'dc rating'                          : {type: FieldTypes.SIMPLE_FIELD, elem: $('#dc_rating')},
       'description'                        : {type: FieldTypes.SIMPLE_FIELD, elem: $('#summary')},
       'due date'                           : {type: FieldTypes.SIMPLE_FIELD, elem: $('#task_due_date')},
+      'date range'                         : {type: FieldTypes.DATE_RANGE, elem: $('#date')},
       'east range'                         : {type: FieldTypes.SIMPLE_FIELD, elem: $('#pvwatts_east_range')},
       'financial preparer'                 : {type: FieldTypes.COMPLEX_SELECT, elem: $('#financial_lead')},
       'financial reviewer'                 : {type: FieldTypes.COMPLEX_SELECT, elem: $('#financial_reviewer')},
@@ -93,7 +96,6 @@ class EditableEntityFields {
       'data download template description' : {type: FieldTypes.SIMPLE_FIELD, elem: $('textarea[name=description]')},
       'data download template time int'    : {type: FieldTypes.SIMPLE_SELECT, elem: $('.form-control.ng-pristine.ng-untouched.ng-valid.ng-valid-required')},
       'data download template default mode': {type: FieldTypes.SIMPLE_SELECT, elem: $('input[name=default_mode]')},
-
 
       // TODO - add remaining fields
     };
@@ -172,6 +174,8 @@ class EditableEntityFields {
       const newFieldValue = dataObj[targetFieldName];
       if (this.getFieldType(targetFieldName) === FieldTypes.COMPLEX_SELECT) {
         await this.setComplexSelectFieldOption(targetFieldName, newFieldValue);
+      } else if (this.getFieldType(targetFieldName) === FieldTypes.DATE_RANGE) {
+        await this.setDateRange(targetFieldName, newFieldValue);
       } else {
         await this.setSimpleFieldValue(targetFieldName, newFieldValue);
       }
@@ -183,13 +187,24 @@ class EditableEntityFields {
    */
   async setSimpleFieldValue(fieldName: string, newValue: string): Promise<void> {
     const fieldElement = this.getFieldElement(fieldName);
-    if (this.getFieldType(fieldName) === FieldTypes.SIMPLE_FIELD) { // there is no need and no way to clear select
+    if (this.getFieldType(fieldName) === FieldTypes.SIMPLE_FIELD
+        || this.getFieldType(fieldName) === FieldTypes.DATE_RANGE) { // there is no need and no way to clear select
       await fieldElement.clear();
     }
     await fieldElement.sendKeys(newValue);
     if (fieldName.toLowerCase() === 'groups') { // TODO add new field type if this behaviour wouldn't be unique
       await fieldElement.sendKeys(protractor.Key.ENTER);
     }
+  }
+
+  /**
+   * Sets date range in "Date Range" field and apllies changes
+   * @param dateRange Date in format: month/day/year - month/day/year
+   */
+  async setDateRange(fieldName: string, dateRange: string): Promise<void> {
+    await this.setSimpleFieldValue(fieldName, dateRange);
+    await Actions.scrollTo(DateRange.applyBtn);
+    await DateRange.applyBtn.click();
   }
 }
 
