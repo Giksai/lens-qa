@@ -5,14 +5,13 @@
   "scripts": {
     "postinstall": "webdriver-manager update --gecko=false",
     "tscw": "tsc -w",
-    "pretest": "tsc",
+    "pretest": "rimraf ./build && tsc",
     "test": "npm-run-all protractor allure --continue-on-error",
-    "debug": "tsc && protractor ./build/protractor.conf.js --highlightDelay 5000 --webDriverLogDir artifacts/logs",
+    "debug": "rimraf ./build && tsc && protractor ./build/protractor.conf.js --highlightDelay 5000 --webDriverLogDir artifacts/logs",
     "protractor": "protractor ./build/protractor.conf.js",
     "allure": "allure generate artifacts/test-reports/allure-src -o artifacts/test-reports/allure-results --clean",
     "results": "allure open artifacts/test-reports/allure-results",
-    "clean": "rmdir /s /q build && rmdir /s /q artifacts\\test-reports",
-    "cleanrun": "rmdir /s /q build && rmdir /s /q artifacts\\test-reports && npm test"
+    "clean": "rimraf ./build && rimraf ./artifacts/test-reports"
   },
   "author": "---------------------------",
   "dependencies": {
@@ -27,6 +26,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "2.8.1",
+    "rimraf": "^3.0.2",
     "typescript": "3.1.6"
   }
 }

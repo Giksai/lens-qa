@@ -11,8 +11,7 @@ To run autotests more slowly,
  execute `npm run debug`.
 (Logs can be found in `artifacts/logs` directory).
 
-To delete allure test results folder (test-reports) and build folder, run `npm run clean`. If there is no build or test-reports folder, 
-it will throw an error, which is ok.
+To delete allure test results folder (test-reports) and build folder, run `npm run clean`.
 
 ### Configuring tests to run
 
@@ -35,6 +34,9 @@ To view test-report open `index.html` in browser
 You could open report in firefox without IDE support.
 
 #### note!
+
+build folder will be automatically removed when executing tests.
+
 It is better to clean reports directory before tests.
 
 Running tests in debug mode requires artifacts/logs folder.
