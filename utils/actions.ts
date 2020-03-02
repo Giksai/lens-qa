@@ -36,7 +36,7 @@ export default class Actions {
    * Waits for an element to be interactable
    * Usable when some elements appear with animation, during which they are not interactable
    */
-  static async waitToBeInteractable(elem: ElementFinder, timeout: number = 5000): Promise<void> {
+  static async waitToBeInteractable(elem: ElementFinder, timeout = 5000): Promise<void> {
     await browser.wait( //Added to improve stability and spontaneous falls
       protractor.ExpectedConditions.elementToBeClickable(elem),
       timeout,
@@ -95,7 +95,7 @@ export default class Actions {
    */
   static async removeAllDownloadedFiles(): Promise<void> {
     const filePath = await path.resolve(__dirname, '../../downloads');
-    let files      = await fs.readdirSync(filePath);
+    const files      = await fs.readdirSync(filePath);
     if (files.length > 0) {
       for (const file of files) {
         await fs.unlinkSync(path.join(filePath, file))
@@ -108,7 +108,7 @@ export default class Actions {
    * @param predicate custom condition
    * @param timeout time in milliseconds before function will fail
    */
-  static async waitFor(predicate: Function, timeout = 5000, askingFrequency = 500) {
+  static async waitFor(predicate: Function, timeout = 5000, askingFrequency = 500): Promise<boolean> {
     while (await predicate() === false) {
       await browser.sleep(askingFrequency);
       timeout -= askingFrequency
@@ -120,29 +120,29 @@ export default class Actions {
   /**
    * Automatically opens a new window, downloads a file and closes it
    */
-  static async downloadFileByLink(link: string) {
+  static async downloadFileByLink(link: string): Promise<void> {
     await browser.executeScript(`window.open(arguments[0], '_blank')`, link);
   }
 
   /**
    * Gets a correct report download link from mail message
    */
-  static extractLinkFromMessageBody(body: string) {
+  static extractLinkFromMessageBody(body: string): string {
     body = body
       .replace(/=\r\n/g, '')    //removes ENTERS and '='
       .replace(/&amp;/g, '&')   //removes excessive symbols
       .replace(/=3D/g, '=');    //removes excessive symbols
-    let regex = /((https?:\/\/|ftp:\/\/|www\.|[^\s:=]+@www\.).*?[a-z_\/0-9\-\#=&])(?=(\.|,|;|\?|\!)?("|'|«|»|\[|\s|\r|\n|$))/gm;
-    let allLinks = body.match(regex);
+    const regex = /((https?:\/\/|ftp:\/\/|www\.|[^\s:=]+@www\.).*?[a-z_\/0-9\-\#=&])(?=(\.|,|;|\?|\!)?("|'|«|»|\[|\s|\r|\n|$))/gm;
+    const allLinks = body.match(regex);
     return allLinks[5];
   }
 
   /**
    * Opens a separate window and switches to it
    */
-  static async openNewWindow() {
+  static async openNewWindow(): Promise<void> {
     await browser.executeScript('window.open()');
-    let handles = await browser.getAllWindowHandles();
+    const handles = await browser.getAllWindowHandles();
     await this.switchToWindow({
       windowHandle: handles[handles.length - 1]
     });
@@ -151,10 +151,10 @@ export default class Actions {
   /**
    * Switches to the window with the given index or window handle
    */
-  static async switchToWindow({ index = null, windowHandle = null }: { index?: number, windowHandle?: string }) {
+  static async switchToWindow({ index = null, windowHandle = null }: { index?: number; windowHandle?: string }): Promise<void> {
     let targetWindowHandle: string;
     if (index) {
-      let handles = await browser.getAllWindowHandles();
+      const handles = await browser.getAllWindowHandles();
       targetWindowHandle = handles[index];
     }
     if (windowHandle) {
@@ -163,7 +163,7 @@ export default class Actions {
     await browser.switchTo().window(targetWindowHandle);
   }
 
-  static async closeCurrentWindow() {
+  static async closeCurrentWindow(): Promise<void> {
     await browser.driver.close();
   }
 }

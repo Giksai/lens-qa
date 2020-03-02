@@ -2,7 +2,7 @@
  * Data Download Page
  */
 
-import { $, by, element, ElementFinder } from 'protractor';
+import { by, element, ElementFinder } from 'protractor';
 import Actions                           from "../../utils/actions";
 
 class DataDownload {

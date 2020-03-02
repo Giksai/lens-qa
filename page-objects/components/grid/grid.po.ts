@@ -271,9 +271,9 @@ export class Grid {
    * Updates selected number of last retrieval mode dropdown in Nth column with another value
    */
   async updateRetrievalModeDropdownInColumn(numberOfDropdowns: number, columnNumber: number, values: string[]): Promise<void> {
-    let dropdownsCount = await this.getDropDownsFromColumnQuantity(columnNumber);
+    const dropdownsCount = await this.getDropDownsFromColumnQuantity(columnNumber);
 
-    let value = values[columnNumber - 1];
+    const value = values[columnNumber - 1];
 
     if (dropdownsCount === 0) throw new Error('No dropdowns found');
     if (dropdownsCount > 2) {
@@ -290,9 +290,9 @@ export class Grid {
    * Gets selected number of last retrieval mode dropdown values in Nth column
    */
   async getRetrievalModeDropdownValueInColumn(numberOfDropdowns: number, columnNumber: number): Promise<string[]> {
-    let dropdownsCount = await this.getDropDownsFromColumnQuantity(columnNumber);
+    const dropdownsCount = await this.getDropDownsFromColumnQuantity(columnNumber);
 
-    let dropdownValue: string[] = [];
+    const dropdownValue: string[] = [];
     if (dropdownsCount === 0) throw new Error('No dropdowns found');
     if (dropdownsCount > 2) {
       let index = 0;

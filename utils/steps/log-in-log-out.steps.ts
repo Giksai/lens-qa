@@ -10,7 +10,7 @@ export default class LogInLogOutSteps {
    * Will use default user if no credentials are passed (see protractor.conf).
    * ! Will not work correctly if already logged in !
    */
-  async login(credentials: { login?: string, password?: string } = {}): Promise<void> {
+  async login(credentials: { login?: string; password?: string } = {}): Promise<void> {
     await browser.get('/');
     await loginPage.login(credentials);
 

@@ -13,7 +13,7 @@ enum FieldTypes {
   DATE_RANGE     = 'date range'
 }
 
-type FieldElement = { type: FieldTypes, elem: ElementFinder };
+type FieldElement = { type: FieldTypes; elem: ElementFinder };
 
 class EditableEntityFields {
   // element with id is not interactable for Protractor in case of complex selects, so additional logic is needed
@@ -129,7 +129,7 @@ class EditableEntityFields {
    * Todo - extend this method to work with all fields.
    * Legacy method. TODO - Consider replacing it with more general ones.
    */
-  async fillSimplePortfolioData({ name, client }: { name?: string, client?: string } = {}): Promise<void> {
+  async fillSimplePortfolioData({ name, client }: { name?: string; client?: string } = {}): Promise<void> {
     // conditions is needed for negative testing
     if (name) {
       await this.getFieldElement('name').sendKeys(name);
@@ -170,7 +170,7 @@ class EditableEntityFields {
    *                 {'compliance lead': 'John Doe', 'technical lead': 'Jane Doe'} // case-insensitive to field names
    */
   async setFieldValues(dataObj: { [fieldName: string]: string }): Promise<void> {
-    for (let targetFieldName of Object.keys(dataObj)) {
+    for (const targetFieldName of Object.keys(dataObj)) {
       const newFieldValue = dataObj[targetFieldName];
       if (this.getFieldType(targetFieldName) === FieldTypes.COMPLEX_SELECT) {
         await this.setComplexSelectFieldOption(targetFieldName, newFieldValue);

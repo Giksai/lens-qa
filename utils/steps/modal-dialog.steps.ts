@@ -46,7 +46,7 @@ export default class ModalDialogSteps {
   /**
    * Confirms modal dialog or alert if something of it is present on the page
    */
-  async confirmIfAsked() {
+  async confirmIfAsked(): Promise<void> {
     try {
       if (await protractor.ExpectedConditions.alertIsPresent()()) {
         await Actions.confirmAlert();
@@ -62,7 +62,7 @@ export default class ModalDialogSteps {
     }
   }
 
-  async cancelIfAsked() {
+  async cancelIfAsked(): Promise<void> {
     try {
       if (await protractor.ExpectedConditions.alertIsPresent()()) {
         await Actions.confirmAlert();

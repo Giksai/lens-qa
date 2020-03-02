@@ -7,7 +7,7 @@ import grid           from "../../page-objects/components/grid/grid.po";
 
 export default class ProjectSteps {
 
-  async clickOnEquipmentGridResultWith({ text, gridName }: { text?: string, gridName?: string }): Promise<void> {
+  async clickOnEquipmentGridResultWith({ text, gridName }: { text?: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await currentGrid.clickOnEquipmentRow(text);
   }

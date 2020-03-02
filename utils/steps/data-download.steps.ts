@@ -11,8 +11,8 @@ export default class DataDownloadSteps {
   /**
    * Downloads report from Data Download page with selected file extension
    */
-  async downloadDataWithFileExtension(extension: string, entityData: DataObject, bigDataMessageSubject: string = null, messageWaitTimeout: number = 60000): Promise<void> {
-    let result = { foundMessage: null };
+  async downloadDataWithFileExtension(extension: string, entityData: DataObject, bigDataMessageSubject: string = null, messageWaitTimeout = 60000): Promise<void> {
+    const result = { foundMessage: null };
     if (bigDataMessageSubject) {
       await Steps.fileFromMessageDownloadSteps.startLookingForMessage(bigDataMessageSubject, result, messageWaitTimeout);
     }
@@ -45,7 +45,7 @@ export default class DataDownloadSteps {
    * - Sets new value in last 3 dropdowns in Measurements and Availability columns
    * - updates name and description
    */
-  async updateDataDownloadTemplate({ numberOfCheckbox, numberOfDropdowns, gridName }: { numberOfCheckbox: number, numberOfDropdowns: number, gridName: string }, templateData: DataObject, values: string[]): Promise<void> {
+  async updateDataDownloadTemplate({ numberOfCheckbox, numberOfDropdowns, gridName }: { numberOfCheckbox: number; numberOfDropdowns: number; gridName: string }, templateData: DataObject, values: string[]): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
 
     await currentGrid.selectNthCheckboxInColumn(numberOfCheckbox, 1); //selects Nth checkbox in Measurements column

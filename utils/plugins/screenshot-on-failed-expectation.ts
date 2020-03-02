@@ -3,13 +3,15 @@
  * Useful with soft assertion (which is default in Jasmine), when different assertions can be made on different pages within one test.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const allure: any; // TODO - migrate on new allure-js with typings
 import { browser } from 'protractor';
 
 const ScreenshotOnFailedExpectationPlugin = {
-  onPrepare: async function () {
+  onPrepare: async function (): Promise<void> {
     const originalAddExpectationResult = jasmine['Spec'].prototype.addExpectationResult;
 
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     jasmine['Spec'].prototype.addExpectationResult = function () {
       if (!arguments[0]) {
         const failureMsg = arguments[1].message;

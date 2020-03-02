@@ -21,7 +21,7 @@ class LoginPage {
     return element(by.cssContainingText('.alert.alert-danger', 'Invalid login credentials'));
   }
 
-  async login({ login = browser.params.defaultUser.login, password = browser.params.defaultUser.password }: { login?: string, password?: string } = {}) {
+  async login({ login = browser.params.defaultUser.login, password = browser.params.defaultUser.password }: { login?: string; password?: string } = {}): Promise<void> {
     await this.loginField.sendKeys(login);
     await this.passwordField.sendKeys(password);
     await this.loginBtn.click();

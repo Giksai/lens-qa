@@ -25,21 +25,21 @@ export default class Check {
    *                                   {client: 'foo', 'compliance lead': 'bar', 'Asset manager': 'baz'} // ignores case
    */
   static async isCurrentEntityDataEqual(expectedDataObj: DataObject): Promise<void> {
-    for (let key of Object.keys(expectedDataObj)) {
+    for (const key of Object.keys(expectedDataObj)) {
       const actualValue = await entityViewPage.getFieldValue(key);
       expect(actualValue.trim()).toBe(expectedDataObj[key], `Entity data for "${key}" field differs from expected`);
     }
   }
 
   static async isClonedDataBlank(expectedDataObj: DataObject): Promise<void> { // edit mode
-    for (let key of Object.keys(expectedDataObj)) {
+    for (const key of Object.keys(expectedDataObj)) {
       const actualValue = await editableEntityFields.getFieldElement(key).getAttribute('value');
       expect(actualValue.trim().length).toBe(0, `Entity data for "${key}" is not blank`);
     }
   }
 
   static async isPerformanceReportDataEqual(expectedDataObj: DataObject): Promise<void> {
-    for (let key of Object.keys(expectedDataObj)) {
+    for (const key of Object.keys(expectedDataObj)) {
       const actualValue = await performanceReport.getFieldValue(key);
       expect(actualValue.trim()).toBe(expectedDataObj[key], `Entity data for "${key}" field differs from expected`);
     }
@@ -87,7 +87,7 @@ export default class Check {
    * Project page
    * Checks that equipment grid have result with given text
    */
-  static async isEquipmentGridHaveResult({ text, gridName }: { text: string, gridName?: string }): Promise<void> {
+  static async isEquipmentGridHaveResult({ text, gridName }: { text: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await Actions.scrollTo(currentGrid.rootElement); // for screen-shots
     expect(await Actions.isVisible(currentGrid.getEquipmentResultRow(text))).toBe(true, `Result with text "${text}" is not present`);
@@ -96,7 +96,7 @@ export default class Check {
   /**
    * Checks that specified (or the only one on the page) grid have result with given text in column with given number (numbers start with 1)
    */
-  static async isGridHaveResult({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
+  static async isGridHaveResult({ columnNumber, text, gridName }: { columnNumber: number; text: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await Actions.scrollTo(currentGrid.rootElement); // for screen-shots
     expect(await Actions.isVisible(currentGrid.getResultRowByColumnText(columnNumber, text))).toBe(true, `Result with text "${text}" in column №"${columnNumber}" is not present`);
@@ -105,7 +105,7 @@ export default class Check {
   /**
    * Checks that specified (or the only one on the page) grid have no result with given text in column with given number (numbers start with 1)
    */
-  static async isGridHaveNoResult({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
+  static async isGridHaveNoResult({ columnNumber, text, gridName }: { columnNumber: number; text: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await Actions.scrollTo(currentGrid.rootElement); // for screen-shots
     expect(await Actions.isVisible(currentGrid.getResultRowByColumnText(columnNumber, text))).toBe(false, `Result with text "${text}" in column №"${columnNumber}" is present`);
@@ -115,7 +115,7 @@ export default class Check {
    * Project page
    * Checks that equipment grid have no result
    */
-  static async iEquipmentGridHaveNoResult({ text, gridName }: { text: string, gridName?: string }): Promise<void> {
+  static async iEquipmentGridHaveNoResult({ text, gridName }: { text: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await Actions.scrollTo(currentGrid.rootElement); // for screen-shots
     expect(await Actions.isVisible(currentGrid.getEquipmentResultRow(text))).toBe(false, `Result with text "${text}" is present`);
@@ -132,7 +132,7 @@ export default class Check {
    * Checks that red asterisks are shown on the page for given fields
    */
   static async isFieldsMarkedRequired(fieldNames: string[]): Promise<void> {
-    for (let fieldName of fieldNames) {
+    for (const fieldName of fieldNames) {
       const asteriskElement = await mainContent.getAsteriskElementFor(fieldName);
       expect(await Actions.isVisible(asteriskElement)).toBe(true, `Red Asterisk for the field "${fieldName}" is not shown`);
       expect(await asteriskElement.getText()).toBe('*', `Red Asterisk for the field "${fieldName}" is not shown correctly`);
@@ -177,7 +177,7 @@ export default class Check {
    */
   static async isValidationErrorsShown(messages: string[]): Promise<void> {
     await Actions.scrollPageUp(); // Scrolling to the errors to make them visible on screenshots
-    for (let message of messages) {
+    for (const message of messages) {
       const validationErrorElement = element(by.cssContainingText('.form-validation-error', message));
       const errorMarker            = validationErrorElement.$('.fa-exclamation-circle');
       expect(await Actions.isVisible(validationErrorElement))
@@ -214,7 +214,7 @@ export default class Check {
    * If text and columnNumber given, will search for such text in given column, and checks that nothing is found.
    * If no gridName specified, will work with first of grids found on the page.
    */
-  static async isNoGridResults({ columnNumber, text, gridName }: { columnNumber?: number, text?: string, gridName?: string } = {}): Promise<void> {
+  static async isNoGridResults({ columnNumber, text, gridName }: { columnNumber?: number; text?: string; gridName?: string } = {}): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await Actions.scrollTo(currentGrid.rootElement); // for screen-shots
     if (!text && !columnNumber) {
@@ -232,14 +232,14 @@ export default class Check {
   /**
    * Checks that file is downloaded
    */
-  static async isDownloadedFileExist(extension: string, timeout: number = 30000): Promise<void> {
+  static async isDownloadedFileExist(extension: string, timeout = 30000): Promise<void> {
     const filePath = await path.resolve(__dirname, '../../downloads/');
 
     let targetFile;
 
     await browser.wait(async function () {
-      let files          = await fs.readdirSync(filePath);
-      let allTargetFiles = await files.filter(file => file.endsWith('.' + extension));
+      const files          = await fs.readdirSync(filePath);
+      const allTargetFiles = await files.filter(file => file.endsWith('.' + extension));
       if (allTargetFiles.length > 0) {
         targetFile = allTargetFiles[0];
         return true;
@@ -255,20 +255,20 @@ export default class Check {
    * checks if updated template data equal
    */
   static async isUpdatedTemplateDataEqual
-  ({ numberOfCheckbox, numberOfDropdowns, gridName }: { numberOfCheckbox: number, numberOfDropdowns: number, gridName: string }, values: string[]): Promise<void> {
+  ({ numberOfCheckbox, numberOfDropdowns, gridName }: { numberOfCheckbox: number; numberOfDropdowns: number; gridName: string }, values: string[]): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
 
     expect(await currentGrid.isNthCheckboxInColumnNotChecked(numberOfCheckbox, 1)).toBe(true, `Target checkbox is still checked in column 1`);
     expect(await currentGrid.isNthCheckboxInColumnNotChecked(numberOfCheckbox, 2)).toBe(true, `Target checkbox is still checked in column 2`);
     expect(await currentGrid.isNthCheckboxInColumnNotChecked(numberOfCheckbox, 3)).toBe(true, `Target checkbox is still checked in column 3`);
 
-    for (let value of await currentGrid.getRetrievalModeDropdownValueInColumn(numberOfDropdowns, 1)) {
+    for (const value of await currentGrid.getRetrievalModeDropdownValueInColumn(numberOfDropdowns, 1)) {
       expect(value).toBe(values[0], `Values in the updated dropdowns in column 1 do not match with test data`);
     }
-    for (let value of await currentGrid.getRetrievalModeDropdownValueInColumn(numberOfDropdowns, 2)) {
+    for (const value of await currentGrid.getRetrievalModeDropdownValueInColumn(numberOfDropdowns, 2)) {
       expect(value).toBe(values[1], `Values in the updated dropdowns in column 2 do not match with test data`);
     }
-    for (let value of await currentGrid.getRetrievalModeDropdownValueInColumn(numberOfDropdowns, 3)) {
+    for (const value of await currentGrid.getRetrievalModeDropdownValueInColumn(numberOfDropdowns, 3)) {
       expect(value).toBe(values[2], `Values in the updated dropdowns in column 3 do not match with test data`);
     }
   }

@@ -19,7 +19,7 @@ export default class FilteringSteps {
     } else { // searching via advanced filter
       await Actions.waitToBeInteractable(gridFilter.advancedFilterBtn);
       await gridFilter.advancedFilterBtn.click();
-      for (let fieldName of Object.keys(condition)) {
+      for (const fieldName of Object.keys(condition)) {
         const advancedField = gridFilter.getAdvancedField(fieldName);
         await advancedField.clear();
         await advancedField.sendKeys(condition[fieldName]);
@@ -32,7 +32,7 @@ export default class FilteringSteps {
    * Performs grid filtering by column name
    */
   async filterGridByColumnName(condition: DataObject): Promise<void> {
-    for (let fieldName of Object.keys(condition)) {
+    for (const fieldName of Object.keys(condition)) {
       const searchField = gridFilterByColumn.getSimpleTextFilter(fieldName);
       await searchField.clear();
       await searchField.sendKeys(condition[fieldName]);

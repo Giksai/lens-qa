@@ -15,11 +15,11 @@ import { by } from 'protractor';
  * Finds element which has descending element with given text (ignoring case)
  */
 by.addLocator('childTextIgnoringCase', function (cssSelector: string, childTextCssSelector: string, childText: string, parentElement: HTMLElement | null) {
-  var parent         = parentElement || document;
-  var targetElements = parent.querySelectorAll(cssSelector);
+  const parent         = parentElement || document;
+  const targetElements = parent.querySelectorAll(cssSelector);
 
   return Array.prototype.filter.call(targetElements, function (targetElement) {
-    var childElement = targetElement.querySelector(childTextCssSelector);
+    const childElement = targetElement.querySelector(childTextCssSelector);
     try {
       return childElement.textContent.trim().toLowerCase() === childText.toLowerCase();
     } catch (error) {
@@ -35,8 +35,8 @@ by.addLocator('childTextIgnoringCase', function (cssSelector: string, childTextC
  * Finds element by exact text
  */
 by.addLocator('exactText', function (cssSelector: string, text: string, parentElement: HTMLElement | null) {
-  var parent         = parentElement || document;
-  var targetElements = parent.querySelectorAll(cssSelector);
+  const parent         = parentElement || document;
+  const targetElements = parent.querySelectorAll(cssSelector);
 
   return Array.prototype.filter.call(targetElements, function (targetElement) {
     return targetElement.textContent === text;
@@ -47,11 +47,11 @@ by.addLocator('exactText', function (cssSelector: string, text: string, parentEl
  * Finds field element by label with exact text (ignoring label case and asterisks in label)
  */
 by.addLocator('fieldLabel', function (label: string, parentElement: HTMLElement | null) {
-  var parent         = parentElement || document;
-  var targetElements = parent.querySelectorAll('.form-group.clearfix');
+  const parent         = parentElement || document;
+  const targetElements = parent.querySelectorAll('.form-group.clearfix');
 
   return Array.prototype.filter.call(targetElements, function (targetElement) {
-    var childElement = targetElement.querySelector('label');
+    const childElement = targetElement.querySelector('label');
     try {
       return childElement.textContent.trim().toLowerCase().replace(/\*/g, '') === label.toLowerCase();
     } catch (error) {
@@ -67,11 +67,11 @@ by.addLocator('fieldLabel', function (label: string, parentElement: HTMLElement 
  * Finds element which has descending element which includes given text (ignoring case)
  */
 by.addLocator('partOfChildTextIgnoringCase', function (cssSelector: string, childTextCssSelector: string, childText: string, parentElement: HTMLElement | null) {
-  var parent         = parentElement || document;
-  var targetElements = parent.querySelectorAll(cssSelector);
+  const parent         = parentElement || document;
+  const targetElements = parent.querySelectorAll(cssSelector);
 
   return Array.prototype.filter.call(targetElements, function (targetElement) {
-    var childElement = targetElement.querySelector(childTextCssSelector);
+    const childElement = targetElement.querySelector(childTextCssSelector);
     try {
       return childElement.textContent.trim().toLowerCase().indexOf(childText.toLowerCase()) !== -1;
     } catch (error) {
@@ -87,8 +87,8 @@ by.addLocator('partOfChildTextIgnoringCase', function (cssSelector: string, chil
  * Finds element by it text (ignoring case and line-brakes before/after it)
  */
 by.addLocator('textIgnoringCase', function (cssSelector: string, text: string, parentElement: HTMLElement | null) {
-  var parent         = parentElement || document;
-  var targetElements = parent.querySelectorAll(cssSelector);
+  const parent         = parentElement || document;
+  const targetElements = parent.querySelectorAll(cssSelector);
 
   return Array.prototype.filter.call(targetElements, function (targetElement) {
     return targetElement.textContent.trim().toLowerCase() === text.trim().toLowerCase();

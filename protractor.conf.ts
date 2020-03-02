@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/camelcase */
 import { Config, browser } from 'protractor';
 import CredentialsManager from './utils/credentialsManager';
 import {SpecReporter} from 'jasmine-spec-reporter';

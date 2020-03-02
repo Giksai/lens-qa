@@ -117,7 +117,7 @@ export default class Steps {
     if (entityData) {
       const str = JSON.stringify({ name: 'regression test project' });
       if (JSON.stringify(entityData) === str) { //TODO this is a Workaround to avoid an issue with required Buyer Name when creating project. Remove when fixed
-        let buyerName: ElementFinder = editableEntityFields.getFieldElement('buyer name');
+        const buyerName: ElementFinder = editableEntityFields.getFieldElement('buyer name');
         await editableEntityFields.setFieldValues(entityData);
         await Actions.isVisible(buyerName);
         await buyerName.sendKeys('Buyer Test Name');
@@ -163,7 +163,7 @@ export default class Steps {
     await Steps.modalDialogSteps.confirmIfAsked();
   }
 
-  static async deleteGridResultWith({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
+  static async deleteGridResultWith({ columnNumber, text, gridName }: { columnNumber: number; text: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await currentGrid.pressDeleteOnResultWith(columnNumber, text);
     await Steps.modalDialogSteps.confirmIfAsked();
@@ -248,12 +248,12 @@ export default class Steps {
     await entityViewPage.cloneBtn.click();
   }
 
-  static async cloneEntityFromGrid({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
+  static async cloneEntityFromGrid({ columnNumber, text, gridName }: { columnNumber: number; text: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await currentGrid.pressCloneIcon(columnNumber, text);
   }
 
-  static async openReportsFromGrid({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
+  static async openReportsFromGrid({ columnNumber, text, gridName }: { columnNumber: number; text: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await currentGrid.pressReportResultWith(columnNumber, text);
   }
@@ -262,7 +262,7 @@ export default class Steps {
    * --------------- DOWNLOAD ---------------
    */
 
-  static async downloadGridElement({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
+  static async downloadGridElement({ columnNumber, text, gridName }: { columnNumber: number; text: string; gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await currentGrid.pressDownloadIcon(columnNumber, text);
     //TODO: add confirmation if asked for big data download
