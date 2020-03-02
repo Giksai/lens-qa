@@ -53,5 +53,6 @@ Thumbs.db
 /artifacts
 /build
 /downloads
+/logs
 
 credentials.json
