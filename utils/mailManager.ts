@@ -2,29 +2,34 @@ import ConfigManager            from './configManager';
 import Actions                  from './actions';
 const axios = require('axios').default;
 
+type MailMessage = { [key: string]: string };
+
 class MailManager {
   private address = ConfigManager.mailConfig.address;
-  private request_getAllMail = this.address + '/messages';
-  private request_getMailContent(mailId) {
+  private requestGetAllMail = this.address + '/messages';
+  private requestGetMailContent(mailId): string {
     return this.address + `/messages/${mailId}:id.json`;
   }
 
   async isWorking(): Promise<boolean> {
+    if(this.address === "") {
+      return undefined;
+    }
     try {
-      let response = await axios.get(this.request_getAllMail);
+      const response = await axios.get(this.requestGetAllMail);
       return response ? (response.status === 200 ? true : false) : false;
     } catch {
       return false;
     }
   }
 
-  async startLookingForMessage(searchingPredicate: Function, searchData: any, result: { foundMessage: any }, timeout = 60000, askingFrequency = 2000) {
-    let prevMatchingMessage = await this.searchBy(searchingPredicate, searchData);
+  async startLookingForMessage(searchingPredicate: Function, searchData: string, result: { foundMessage: MailMessage }, timeout = 60000, askingFrequency = 2000): Promise<void> {
+    const prevMatchingMessage = await this.searchBy(searchingPredicate, searchData);
     if (!prevMatchingMessage) {
       result.foundMessage = await this.waitForMessage(searchingPredicate, searchData, timeout, askingFrequency);
     } else {
       let foundMessage;
-      let waitResult = await Actions.waitFor(async () => {
+      const waitResult = await Actions.waitFor(async () => {
         foundMessage = await this.searchBy(searchingPredicate, searchData);
         return foundMessage.id !== prevMatchingMessage.id ? true : false;
       }, timeout, askingFrequency);
@@ -32,28 +37,28 @@ class MailManager {
     }
   }
 
-  async waitForMessage(searchingPredicate: Function, searchData: string, timeout = 60000, askingFrequency = 2000) { 
+  async waitForMessage(searchingPredicate: Function, searchData: string, timeout = 60000, askingFrequency = 2000): Promise<MailMessage> { 
     let foundMessage;
-    let waitResult = await Actions.waitFor(async () => {
+    const waitResult = await Actions.waitFor(async () => {
       foundMessage = await this.searchBy(searchingPredicate, searchData);
       return foundMessage ? true : false;
     }, timeout, askingFrequency);
     return waitResult ? foundMessage : undefined;
   }
 
-  async getAllMessagesArray(): Promise<any[]> {
-    let response = await axios.get(this.request_getAllMail);
+  async getAllMessagesArray(): Promise<MailMessage[]> {
+    const response = await axios.get(this.requestGetAllMail);
     return response.data.reverse();
   }
 
-  async getBodyOfMessage(message: any): Promise<string> {
-    let messageContents = await axios.get(this.request_getMailContent(message.id));
+  async getBodyOfMessage(message: MailMessage): Promise<string> {
+    const messageContents = await axios.get(this.requestGetMailContent(message.id));
     return messageContents.data.source;
   }
 
-  async searchBy(predicate: Function, searchData: any): Promise<any> {
-    let allMessages = await this.getAllMessagesArray();
-    for (let message of allMessages) {
+  async searchBy(predicate: Function, searchData: string): Promise<MailMessage> {
+    const allMessages = await this.getAllMessagesArray();
+    for (const message of allMessages) {
       if (predicate(message, searchData)) {
         return message;
       }
@@ -62,7 +67,7 @@ class MailManager {
   }
 
   searchingPredicates = {
-    subject: (message, searchData) => {
+    subject: (message: MailMessage, searchData: string): boolean => {
       return message.subject === searchData ? true : false;
     }
   }
