@@ -6,7 +6,7 @@
     "postinstall": "webdriver-manager update --gecko=false",
     "tscw": "tsc -w",
     "pretest": "rimraf ./build && tsc",
-    "test": "npm-run-all protractor allure --continue-on-error",
+    "test": "npm-run-all check protractor allure --continue-on-error",
     "debug": "rimraf ./build && tsc && protractor ./build/protractor.conf.js --highlightDelay 5000 --webDriverLogDir artifacts/logs",
     "protractor": "protractor ./build/protractor.conf.js",
     "allure": "allure generate artifacts/test-reports/allure-src -o artifacts/test-reports/allure-results --clean",
