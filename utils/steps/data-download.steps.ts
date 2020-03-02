@@ -12,7 +12,7 @@ export default class DataDownloadSteps {
    * Downloads report from Data Download page with selected file extension
    */
   async downloadDataWithFileExtension(extension: string, entityData: DataObject, bigDataMessageSubject: string = null, messageWaitTimeout: number = 60000): Promise<void> {
-    let result = { foundMessage: undefined };
+    let result = { foundMessage: null };
     if (bigDataMessageSubject) {
       await Steps.fileFromMessageDownloadSteps.startLookingForMessage(bigDataMessageSubject, result, messageWaitTimeout);
     }

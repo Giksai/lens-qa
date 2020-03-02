@@ -265,5 +265,6 @@ export default class Steps {
   static async downloadGridElement({ columnNumber, text, gridName }: { columnNumber: number, text: string, gridName?: string }): Promise<void> {
     const currentGrid = gridName ? entityViewPage.getGrid(gridName) : grid;
     await currentGrid.pressDownloadIcon(columnNumber, text);
+    //TODO: add confirmation if asked for big data download
   }
 }

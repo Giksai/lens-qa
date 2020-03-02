@@ -28,7 +28,7 @@ class MailManager {
         foundMessage = await this.searchBy(searchingPredicate, searchData);
         return foundMessage.id !== prevMatchingMessage.id ? true : false;
       }, timeout, askingFrequency);
-      waitResult ? result.foundMessage = foundMessage : result.foundMessage = null;
+      waitResult ? result.foundMessage = foundMessage : result.foundMessage = undefined;
     }
   }
 
@@ -38,7 +38,7 @@ class MailManager {
       foundMessage = await this.searchBy(searchingPredicate, searchData);
       return foundMessage ? true : false;
     }, timeout, askingFrequency);
-    return waitResult ? foundMessage : null;
+    return waitResult ? foundMessage : undefined;
   }
 
   async getAllMessagesArray(): Promise<any[]> {
@@ -58,7 +58,7 @@ class MailManager {
         return message;
       }
     }
-    return null;
+    return undefined;
   }
 
   searchingPredicates = {
