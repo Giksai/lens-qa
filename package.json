@@ -12,7 +12,8 @@
     "allure": "allure generate artifacts/test-reports/allure-src -o artifacts/test-reports/allure-results --clean",
     "results": "allure open artifacts/test-reports/allure-results",
     "clean": "rimraf ./build && rimraf ./artifacts/test-reports",
-    "check": "eslint --format codeframe **/*.ts"
+    "check": "eslint --format codeframe **/*.ts",
+    "fix": "eslint --fix **/*.ts"
   },
   "author": "---------------------------",
   "dependencies": {
