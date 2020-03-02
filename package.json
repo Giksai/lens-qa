@@ -11,7 +11,8 @@
     "protractor": "protractor ./build/protractor.conf.js",
     "allure": "allure generate artifacts/test-reports/allure-src -o artifacts/test-reports/allure-results --clean",
     "results": "allure open artifacts/test-reports/allure-results",
-    "clean": "rimraf ./build && rimraf ./artifacts/test-reports"
+    "clean": "rimraf ./build && rimraf ./artifacts/test-reports",
+    "check": "eslint --format codeframe **/*.ts"
   },
   "author": "---------------------------",
   "dependencies": {
@@ -26,6 +27,9 @@
   },
   "devDependencies": {
     "@types/jasmine": "2.8.1",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "eslint": "^6.8.0",
     "rimraf": "^3.0.2",
     "typescript": "^3.2.1"
   }
