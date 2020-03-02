@@ -1,5 +1,7 @@
 import ConfigManager            from './configManager';
 import Actions                  from './actions';
+import logger                   from '../loggerConfig/loggerConfigurator';
+
 const axios = require('axios').default;
 
 type MailMessage = { [key: string]: string };
@@ -12,13 +14,27 @@ class MailManager {
   }
 
   async isWorking(): Promise<boolean> {
-    if(this.address === "") {
+    logger.debug(`Mail catcher: checking address.`);
+    if (this.address === "") {
+      logger.warn(`Mail catcher: address is absent!`);
       return undefined;
     }
     try {
       const response = await axios.get(this.requestGetAllMail);
-      return response ? (response.status === 200 ? true : false) : false;
+      if (response) {
+        if (response.status === 200) {
+          logger.debug(`Mail catcher: OK.`);
+          return true;
+        } else {
+          logger.debug(`Mail catcher: wrong response: ${response.status}.`);
+          return false;
+        }
+      } else {
+        logger.error(`Mail catcher: could not establish connection.`);
+        return false;
+      }
     } catch {
+      logger.error(`Mail catcher: unknown error.`);
       return false;
     }
   }

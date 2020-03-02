@@ -12,7 +12,7 @@ export default class FileFromMessageDownloadSteps {
         break;
       }
       case undefined: {
-        fail(' Mail catcher address is empty');
+        pending(' Mail catcher address is empty');
         break;
       }
       default: {
