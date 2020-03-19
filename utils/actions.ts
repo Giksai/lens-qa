@@ -125,19 +125,6 @@ export default class Actions {
   }
 
   /**
-   * Gets a correct report download link from mail message
-   */
-  static extractLinkFromMessageBody(body: string): string {
-    body = body
-      .replace(/=\r\n/g, '')    //removes ENTERS and '='
-      .replace(/&amp;/g, '&')   //removes excessive symbols
-      .replace(/=3D/g, '=');    //removes excessive symbols
-    const regex = /((https?:\/\/|ftp:\/\/|www\.|[^\s:=]+@www\.).*?[a-z_\/0-9\-\#=&])(?=(\.|,|;|\?|\!)?("|'|«|»|\[|\s|\r|\n|$))/gm;
-    const allLinks = body.match(regex);
-    return allLinks[5];
-  }
-
-  /**
    * Opens a separate window and switches to it
    */
   static async openNewWindow(): Promise<void> {

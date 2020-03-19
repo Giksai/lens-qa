@@ -5,6 +5,7 @@
 import { $, element, by, browser, protractor, ElementFinder } from 'protractor';
 import Actions                                                from '../../utils/actions';
 import DateRange                                              from '../components/date-range.po';
+import ReportComponent                                        from '../components/report-component.po';
 
 enum FieldTypes {
   SIMPLE_FIELD   = 'simple field',
@@ -14,6 +15,10 @@ enum FieldTypes {
 }
 
 type FieldElement = { type: FieldTypes; elem: ElementFinder };
+type ComponentData = { [componentName: string]: {
+  textBlock?: string;
+  //There will be charts, checkboxes and tables if necessary
+}; };
 
 class EditableEntityFields {
   // element with id is not interactable for Protractor in case of complex selects, so additional logic is needed
@@ -96,7 +101,7 @@ class EditableEntityFields {
       'data download template description' : {type: FieldTypes.SIMPLE_FIELD, elem: $('textarea[name=description]')},
       'data download template time int'    : {type: FieldTypes.SIMPLE_SELECT, elem: $('.form-control.ng-pristine.ng-untouched.ng-valid.ng-valid-required')},
       'data download template default mode': {type: FieldTypes.SIMPLE_SELECT, elem: $('input[name=default_mode]')},
-
+      
       // TODO - add remaining fields
     };
   }
@@ -205,6 +210,18 @@ class EditableEntityFields {
     await this.setSimpleFieldValue(fieldName, dateRange);
     await Actions.scrollTo(DateRange.applyBtn);
     await DateRange.applyBtn.click();
+  }
+
+  /**
+   * 
+   * @param componentsData 
+   */
+  async setComponents(componentsData: ComponentData): Promise<void> {
+    const allComponents = await ReportComponent.getAllComponents();
+    for (const componentName of Object.keys(componentsData)) {
+      const componentData = componentsData[componentName];
+
+    }
   }
 }
 

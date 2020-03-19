@@ -6,6 +6,7 @@
 import { browser, protractor, ElementFinder } from 'protractor';
 import Actions                                from '../actions';
 import DataDownloadSteps                      from './data-download.steps';
+import ReportComponentSteps                         from './report-component.steps';
 import FileFromMessageDownloadSteps           from './file-from-message-download.steps';
 import FilteringSteps                         from './filtering.steps';
 import LogInLogOutSteps                       from "./log-in-log-out.steps";
@@ -28,6 +29,10 @@ export default class Steps {
 
   static get dataDownloadSteps(): DataDownloadSteps {
     return new DataDownloadSteps;
+  }
+
+  static get componentSteps(): ReportComponentSteps {
+    return new ReportComponentSteps;
   }
 
   static get fileFromMessageDownloadSteps(): FileFromMessageDownloadSteps {

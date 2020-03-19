@@ -35,10 +35,23 @@ export default class FileFromMessageDownloadSteps {
     }, messageWaitTimeout);
     if (result.foundMessage) {
       await Actions.downloadFileByLink(
-        Actions.extractLinkFromMessageBody(
+        this.extractLinkFromMessageBody(
           await mailManager.getBodyOfMessage(result.foundMessage)));
     } else {
       fail(' Timed out waiting for message');
     }
+  }
+
+    /**
+   * Gets a correct report download link from mail message
+   */
+  extractLinkFromMessageBody(body: string): string {
+    body = body
+      .replace(/=\r\n/g, '')    //removes ENTERS and '='
+      .replace(/&amp;/g, '&')   //removes excessive symbols
+      .replace(/=3D/g, '=');    //removes excessive symbols
+    const regex = /((https?:\/\/|ftp:\/\/|www\.|[^\s:=]+@www\.).*?[a-z_\/0-9\-\#=&])(?=(\.|,|;|\?|\!)?("|'|«|»|\[|\s|\r|\n|$))/gm;
+    const allLinks = body.match(regex);
+    return allLinks[5];
   }
 }
